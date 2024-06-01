@@ -11,7 +11,7 @@ cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/company.seiun.net/asse
 cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/school.seiun.net/assets/
 cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/group.seiun.net/assets/
 
-source envPeerCompany.sh
+source ./scripts/envPeerCompany.sh
 export ORDERER_ADMIN_TLS_SIGN_CERT=$LOCAL_CA_PATH/council.seiun.net/registers/orderer1/tls-msp/signcerts/cert.pem
 export ORDERER_ADMIN_TLS_PRIVATE_KEY=$LOCAL_CA_PATH/council.seiun.net/registers/orderer1/tls-msp/keystore/key.pem
 osnadmin channel join -o orderer1.council.seiun.net:7052 --channelID testchannel --config-block $LOCAL_ROOT_PATH/data/testchannel.block --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"
@@ -25,12 +25,12 @@ export ORDERER_ADMIN_TLS_PRIVATE_KEY=$LOCAL_CA_PATH/council.seiun.net/registers/
 osnadmin channel join -o orderer3.council.seiun.net:7058 --channelID testchannel --config-block $LOCAL_ROOT_PATH/data/testchannel.block --ca-file "$ORDERER_CA" --client-cert "$ORDERER_ADMIN_TLS_SIGN_CERT" --client-key "$ORDERER_ADMIN_TLS_PRIVATE_KEY"
 osnadmin channel list -o orderer3.council.seiun.net:7058 --ca-file $ORDERER_CA --client-cert $ORDERER_ADMIN_TLS_SIGN_CERT --client-key $ORDERER_ADMIN_TLS_PRIVATE_KEY
 
-source envPeerCompany.sh
+source ./scripts/envPeerCompany.sh
 peer channel join -b $LOCAL_CA_PATH/company.seiun.net/assets/testchannel.block
 peer channel list
-source envPeerSchool.sh
+source ./scripts/envPeerSchool.sh
 peer channel join -b $LOCAL_CA_PATH/school.seiun.net/assets/testchannel.block
 peer channel list
-source envPeerGroup.sh
+source ./scripts/envPeerGroup.sh
 peer channel join -b $LOCAL_CA_PATH/group.seiun.net/assets/testchannel.block
 peer channel list

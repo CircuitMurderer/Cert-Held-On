@@ -1,7 +1,7 @@
 package main
 
 import (
-	"SEIUN/restapi/web"
+	"cert-held-on/restapi/web"
 	"fmt"
 )
 

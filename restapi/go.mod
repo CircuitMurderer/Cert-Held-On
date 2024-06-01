@@ -1,4 +1,4 @@
-module SEIUN/restapi
+module cert-held-on/restapi
 
 go 1.21
 

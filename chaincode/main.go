@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
-	"SEIUN/chaincode/cc"
+	"cert-held-on/chaincode/cc"
 )
 
 

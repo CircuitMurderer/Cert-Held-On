@@ -1,4 +1,4 @@
-module SEIUN/chaincode
+module cert-held-on/chaincode
 
 go 1.21
 
