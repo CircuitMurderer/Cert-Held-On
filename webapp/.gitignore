@@ -1,16 +1,10 @@
-# go
-*/vendor
-*.tar.gz
-*.sum
-/data
-/orgs
-*/.idea
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# node
 # dependencies
 /node_modules
 /npm-debug.log*
 /yarn-error.log
+
 
 # production
 /dist
@@ -24,4 +18,3 @@
 /src/.umi-test
 /.env.local
 /.vscode
-

@@ -1,0 +1,192 @@
+version: '2'
+
+networks:
+  network:
+    ipam:
+      config:
+        - subnet: 172.21.0.0/16
+          gateway: 172.21.0.1
+
+
+services:
+  council.seiun.net:
+    container_name: council.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: ca-base
+    command: sh -c 'fabric-ca-server start -d -b ca-admin:ca-adminpw --port 7050'
+    environment:
+      - FABRIC_CA_SERVER_CSR_CN=council.seiun.net
+      - FABRIC_CA_SERVER_CSR_HOSTS=council.seiun.net
+    volumes:
+      - ${LOCAL_CA_PATH}/council.seiun.net/ca:${DOCKER_CA_PATH}/ca
+    ports:
+      - 7050:7050
+    networks:
+      network:
+        ipv4_address: 172.21.0.10
+
+  company.seiun.net:
+    container_name: company.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: ca-base
+    command: sh -c 'fabric-ca-server start -d -b ca-admin:ca-adminpw --port 7050'
+    environment:
+      - FABRIC_CA_SERVER_CSR_CN=company.seiun.net
+      - FABRIC_CA_SERVER_CSR_HOSTS=company.seiun.net
+    volumes:
+      - ${LOCAL_CA_PATH}/company.seiun.net/ca:${DOCKER_CA_PATH}/ca
+    ports:
+      - 7250:7050
+    networks:
+      network:
+        ipv4_address: 172.21.0.20
+
+  school.seiun.net:
+    container_name: school.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: ca-base
+    command: sh -c 'fabric-ca-server start -d -b ca-admin:ca-adminpw --port 7050'
+    environment:
+      - FABRIC_CA_SERVER_CSR_CN=school.seiun.net
+      - FABRIC_CA_SERVER_CSR_HOSTS=school.seiun.net
+    volumes:
+      - ${LOCAL_CA_PATH}/school.seiun.net/ca:${DOCKER_CA_PATH}/ca
+    ports:
+      - 7350:7050
+    networks:
+      network:
+        ipv4_address: 172.21.0.30
+  
+  group.seiun.net:
+    container_name: group.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: ca-base
+    command: sh -c 'fabric-ca-server start -d -b ca-admin:ca-adminpw --port 7050'
+    environment:
+      - FABRIC_CA_SERVER_CSR_CN=group.seiun.net
+      - FABRIC_CA_SERVER_CSR_HOSTS=group.seiun.net
+    volumes:
+      - ${LOCAL_CA_PATH}/group.seiun.net/ca:${DOCKER_CA_PATH}/ca
+    ports:
+      - 7450:7050
+    networks:
+      network:
+        ipv4_address: 172.21.0.40
+
+  peer1.company.seiun.net:
+    container_name: peer1.company.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.company.seiun.net
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7251
+      - CORE_PEER_ADDRESS=peer1.company.seiun.net:7251
+      - CORE_PEER_LOCALMSPID=companyMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.company.seiun.net:7251
+    volumes:
+      - ${LOCAL_CA_PATH}/company.seiun.net/registers/peer1:${DOCKER_CA_PATH}/peer
+    ports:
+      - 7251:7251
+    networks:
+      network:
+        ipv4_address: 172.21.0.21
+      
+  peer1.school.seiun.net:
+    container_name: peer1.school.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.school.seiun.net
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7351
+      - CORE_PEER_ADDRESS=peer1.school.seiun.net:7351
+      - CORE_PEER_LOCALMSPID=schoolMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.school.seiun.net:7351
+    volumes:
+      - ${LOCAL_CA_PATH}/school.seiun.net/registers/peer1:${DOCKER_CA_PATH}/peer
+    ports:
+      - 7351:7351
+    networks:
+      network:
+        ipv4_address: 172.21.0.31
+
+  peer1.group.seiun.net:
+    container_name: peer1.group.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.group.seiun.net
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7451
+      - CORE_PEER_ADDRESS=peer1.group.seiun.net:7451
+      - CORE_PEER_LOCALMSPID=groupMSP
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.group.seiun.net:7451
+    volumes:
+      - ${LOCAL_CA_PATH}/group.seiun.net/registers/peer1:${DOCKER_CA_PATH}/peer
+    ports:
+      - 7451:7451
+    networks:
+      network:
+        ipv4_address: 172.21.0.41
+      
+  orderer1.council.seiun.net:
+    container_name: orderer1.council.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: orderer-base
+    environment:
+      - ORDERER_HOST=orderer1.council.seiun.net
+      - ORDERER_GENERAL_LOCALMSPID=councilMSP
+      - ORDERER_GENERAL_LISTENPORT=7051
+    volumes:
+      - ${LOCAL_CA_PATH}/council.seiun.net/registers/orderer1:${DOCKER_CA_PATH}/orderer
+    ports:
+      - 7051:7051
+      - 7052:8888
+      - 7053:9999
+    networks:
+      network:
+        ipv4_address: 172.21.0.11
+
+  orderer2.council.seiun.net:
+    container_name: orderer2.council.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: orderer-base
+    environment:
+      - ORDERER_HOST=orderer2.council.seiun.net
+      - ORDERER_GENERAL_LOCALMSPID=councilMSP
+      - ORDERER_GENERAL_LISTENPORT=7054
+    volumes:
+      - ${LOCAL_CA_PATH}/council.seiun.net/registers/orderer2:${DOCKER_CA_PATH}/orderer
+    ports:
+      - 7054:7054
+      - 7055:8888
+      - 7056:9999
+    networks:
+      network:
+        ipv4_address: 172.21.0.12
+      
+  orderer3.council.seiun.net:
+    container_name: orderer3.council.seiun.net
+    extends:
+      file: docker-base.yaml
+      service: orderer-base
+    environment:
+      - ORDERER_HOST=orderer3.council.seiun.net
+      - ORDERER_GENERAL_LOCALMSPID=councilMSP
+      - ORDERER_GENERAL_LISTENPORT=7057
+    volumes:
+      - ${LOCAL_CA_PATH}/council.seiun.net/registers/orderer3:${DOCKER_CA_PATH}/orderer
+    ports:
+      - 7057:7057
+      - 7058:8888
+      - 7059:9999
+    networks:
+      network:
+        ipv4_address: 172.21.0.13

@@ -1,0 +1,10 @@
+orgName: company
+mspID: companyMSP
+cryptoPath: ../orgs/company.seiun.net
+certPath: /registers/user1/msp/signcerts/cert.pem
+keyPath: /registers/user1/msp/keystore/
+tlsCertPath: /assets/tls-ca-cert.pem
+peerPoint: peer1.company.seiun.net:7251
+gatewayPeer: peer1.company.seiun.net
+channel: testchannel
+ccType: basic
