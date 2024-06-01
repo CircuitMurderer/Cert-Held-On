@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-export CHAINCODE_ID=basic_1:1bfc1b4175e51c21e2a9f47de9b349f4490c4a5eb2701712856b20ee384d7b34
+export CHAINCODE_ID=basic_1:e9260fc5faf877515b55e173f409ba21802c809fd694792dc04c33c905f29464
 
 source ./scripts/envPeerCompany.sh
 peer lifecycle chaincode approveformyorg -o orderer1.council.seiun.net:7051 --tls --cafile $ORDERER_CA --channelID testchannel --name basic --version 1.0 --sequence 1 --waitForEvent --init-required --package-id $CHAINCODE_ID

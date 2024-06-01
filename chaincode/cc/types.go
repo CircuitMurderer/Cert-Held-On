@@ -9,14 +9,18 @@ type SmartContract struct {
 }
 
 type CertItem struct {
-	ID      string `json:"ID"`
-	UserID  string `json:"UsrID"`
-	Status  int    `json:"Status"`
-	ExpDays int    `json:"ExpDays"`
-	ReqTime string `json:"ReqTime"`
-	IsuTime string `json:"IsuTime"`
-	RvkTime string `json:"RvkTime"`
-	Key     string `json:"Key"`
+	ID      	string 	`json:"ID"`
+	UserID  	string 	`json:"UsrID"`
+	Status  	int    	`json:"Status"`
+	ExpDays 	int    	`json:"ExpDays"`
+	ReqTime 	string 	`json:"ReqTime"`
+	IsuTime 	string 	`json:"IsuTime"`
+	RvkTime 	string 	`json:"RvkTime"`
+	IndexKey    string 	`json:"IndexKey"`
+
+	CertTitle	string 	`json:"CertTitle"`
+	CertType	string	`json:"CertType"`
+	CertCont	string	`json:"CertCont"`
 	// History []string `json:"History"`
 }
 

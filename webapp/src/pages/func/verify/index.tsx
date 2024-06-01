@@ -6,7 +6,8 @@ import {
   Col,
   Row,
   InputNumber,
-  Select
+  Select,
+  message
 } from 'antd';
 import type { FormProps } from 'antd';
 import { useLocation } from 'react-router-dom';
@@ -23,9 +24,15 @@ const queryVerify = (params: FieldType) => {
     method: 'POST',
     data: params
   })
-  .then((resp) => {
-    console.log(resp);
-  });
+    .then((resp) => {
+      console.log(resp);
+    })
+    .then(() => {
+      message.success('提交成功', 1);
+      setTimeout(() => {
+        location.assign('/list/queryTable');
+      }, 1000)
+    })
 }
 
 const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
@@ -92,7 +99,7 @@ const FormDisabledDemo: React.FC = () => {
           label="有效期"
           initialValue={0}
         >
-          <InputNumber defaultValue={0}/>
+          <InputNumber defaultValue={0} min={-1}/>
         </Form.Item>
  
         <Form.Item wrapperCol={{ offset: 3, span: 12 }}>

@@ -7,13 +7,21 @@ import (
 	"time"
 )
 
-func (s *SmartContract) SubmitReq(ctx TCI, id string, userID string, key string) (string, error) {
+func (s *SmartContract) SubmitReq(
+	ctx TCI, 
+	id string, 
+	userID string, 
+	certTitle string, 
+	certType string, 
+	certCont string, 
+	indexKey string) (string, error) {
+
 	realID := id
 	if !strings.HasPrefix(id, "Item-") {
 		realID = "Item-" + id
 	}
 
-	// hasIt, err := s.hasItem(ctx, realID)
+	// hasIt, err := s.HasItem(ctx, realID)
 	// if err != nil {
 	// 	return "", err
 	// }
@@ -23,14 +31,18 @@ func (s *SmartContract) SubmitReq(ctx TCI, id string, userID string, key string)
 	// }
 
 	cItem := CertItem{
-		ID:      realID,
-		UserID:  userID,
-		Status:  UnauthedCert,
-		ReqTime: time.Now().Format("2006-01-02 15:04:05"),
-		IsuTime: "",
-		RvkTime: "",
-		ExpDays: 0,
-		Key:     key,
+		ID:      	realID,
+		UserID:  	userID,
+		Status:  	UnauthedCert,
+		ReqTime: 	time.Now().Format("2006-01-02 15:04:05"),
+		IsuTime: 	"",
+		RvkTime: 	"",
+		ExpDays: 	0,
+		IndexKey:	indexKey,
+
+		CertTitle: 	certTitle,
+		CertType: 	certType,
+		CertCont: 	certCont,
 	}
 
 	itemJSON, err := json.Marshal(cItem)
@@ -86,5 +98,5 @@ func (s *SmartContract) UserGetCertKey(ctx TCI, id string) (string, error) {
 		return "", fmt.Errorf("this cert is outdated")
 	}
 
-	return certItem.Key, nil
+	return certItem.IndexKey, nil
 }

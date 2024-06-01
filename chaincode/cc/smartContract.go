@@ -9,9 +9,11 @@ import (
 func (s *SmartContract) InitLedger(ctx TCI) error {
 	items := []CertItem{
 		{ID: "Item-Test1", UserID: "Admin", Status: OtherStatus,
-			ReqTime: "", IsuTime: "", RvkTime: "", ExpDays: 0, Key: ""},
+			ReqTime: "", IsuTime: "", RvkTime: "", ExpDays: 0, 
+			IndexKey: "", CertTitle: "Test 1", CertType: "", CertCont: ""},
 		{ID: "Item-Test2", UserID: "Guest", Status: OtherStatus,
-			ReqTime: "", IsuTime: "", RvkTime: "", ExpDays: 0, Key: ""},
+			ReqTime: "", IsuTime: "", RvkTime: "", ExpDays: 0, 
+			IndexKey: "", CertTitle: "Test 2", CertType: "", CertCont: ""},
 	}
 
 	waitingList := make([]string, 0)
@@ -38,7 +40,7 @@ func (s *SmartContract) InitLedger(ctx TCI) error {
 	return nil
 }
 
-func (s *SmartContract) hasItem(ctx TCI, id string) (bool, error) {
+func (s *SmartContract) HasItem(ctx TCI, id string) (bool, error) {
 	itemJSON, err := ctx.GetStub().GetState(id)
 	if err != nil {
 		return false, fmt.Errorf("failed to read world state. %v", err)

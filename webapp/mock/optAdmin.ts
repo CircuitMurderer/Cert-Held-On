@@ -4,7 +4,8 @@ import request from 'umi-request';
 
 export default {
   'POST  /api/verify': (req: Request, res: Response) => {
-    const { certID, status, expDays } = req.body;
+    let { certID, status, expDays } = req.body;
+    if (expDays === -1) { expDays = -2; }
 
     request
       .post('http://localhost:3000/invoke', {

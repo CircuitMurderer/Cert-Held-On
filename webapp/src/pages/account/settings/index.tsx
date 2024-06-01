@@ -17,7 +17,7 @@ interface RerenderProps {
 }
 
 let Rerender: FC<RerenderProps> = ({ data, callback }) => {
-  console.log('Rerender 跟新了');
+  // console.log('Rerender updated');
   return (
     <div>
       <Button onClick={callback}>{data}</Button>

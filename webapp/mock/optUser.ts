@@ -24,6 +24,9 @@ export default {
           args: [
             certID,
             userID,
+            certTitle, 
+            certType, 
+            certCont,
             indexKey
           ]
         },

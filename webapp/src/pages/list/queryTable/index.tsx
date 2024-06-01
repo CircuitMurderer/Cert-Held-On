@@ -32,7 +32,7 @@ const QueryTable: FC<QueryTableProps> = ({ dispatch, queryTable, loading }) => {
   const { queryTableSource } = queryTable;
 
   const jumpTo = (to: string, id: string) => {
-    message.info('正在跳转……', 1);
+    message.loading('正在跳转……', 1);
     setTimeout(() => {
       location.assign("/func/" + to + "?id=" + id);
     }, 1000);
@@ -45,12 +45,14 @@ const QueryTable: FC<QueryTableProps> = ({ dispatch, queryTable, loading }) => {
           <div>
               <p><strong>证书ID：</strong>{record.ID}</p>
               <p><strong>用户ID：</strong>{record.UsrID}</p>
+              <p><strong>证书标题：</strong>{record.CertTitle}</p>
+              <p><strong>证书类型：</strong>{record.CertType}</p>
               <p><strong>证书状态：</strong>{statusTextMap[record.Status]}</p>
               <p><strong>有效期：</strong>{record.ExpDays}</p>
               <p><strong>申请时间：</strong>{record.ReqTime}</p>
               <p><strong>颁发时间：</strong>{record.IsuTime ? record.IsuTime : '无'}</p>
               <p><strong>撤销时间：</strong>{record.RvkTime ? record.RvkTime : '无'}</p>
-              <p><strong>内容：</strong>在HTML中，要让冒号之后的文本对其，可以使用CSS样式来实现。你可以通过设置text-align: justify; 属性来对文本进行对齐，或者使用</p>
+              <p><strong>内容：</strong>{record.CertCont}</p>
           </div>
         ),
       onOk: () => { }, //showAlert(); },
@@ -129,6 +131,10 @@ const QueryTable: FC<QueryTableProps> = ({ dispatch, queryTable, loading }) => {
     {
       title: '用户ID',
       dataIndex: 'UsrID',
+    },
+    {
+      title: '证书标题',
+      dataIndex: 'CertTitle',
     },
     {
       title: '申请时间',
