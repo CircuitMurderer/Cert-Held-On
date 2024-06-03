@@ -1,6 +1,7 @@
 #!/bin/bash -u
 
 networkUp() {
+    source ./scripts/envBase.sh
     docker-compose -f $LOCAL_ROOT_PATH/compose/docker-compose.yaml up -d council.seiun.net company.seiun.net school.seiun.net group.seiun.net
 }
 

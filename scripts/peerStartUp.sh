@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+source ./scripts/envBase.sh
+
 docker-compose -f $LOCAL_ROOT_PATH/compose/docker-compose.yaml up -d peer1.company.seiun.net peer1.school.seiun.net peer1.group.seiun.net 
 docker-compose -f $LOCAL_ROOT_PATH/compose/docker-compose.yaml up -d orderer1.council.seiun.net orderer2.council.seiun.net orderer3.council.seiun.net
 sleep 5
@@ -11,6 +13,7 @@ cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/company.seiun.net/asse
 cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/school.seiun.net/assets/
 cp $LOCAL_ROOT_PATH/data/testchannel.block $LOCAL_CA_PATH/group.seiun.net/assets/
 
+source ./scripts/envBase.sh
 source ./scripts/envPeerCompany.sh
 export ORDERER_ADMIN_TLS_SIGN_CERT=$LOCAL_CA_PATH/council.seiun.net/registers/orderer1/tls-msp/signcerts/cert.pem
 export ORDERER_ADMIN_TLS_PRIVATE_KEY=$LOCAL_CA_PATH/council.seiun.net/registers/orderer1/tls-msp/keystore/key.pem

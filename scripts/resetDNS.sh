@@ -1,1 +1,0 @@
-mv /etc/hosts.bak /etc/hosts

@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+source ./scripts/envBase.sh
+
 echo "Preparation============================="
 mkdir -p $LOCAL_CA_PATH/council.seiun.net/assets
 cp $LOCAL_CA_PATH/council.seiun.net/ca/crypto/ca-cert.pem $LOCAL_CA_PATH/council.seiun.net/assets/ca-cert.pem

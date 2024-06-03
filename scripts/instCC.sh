@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+source ./scripts/envBase.sh
+
 source ./scripts/envPeerCompany.sh
 peer lifecycle chaincode package basic.tar.gz --path chaincode --lang golang --label basic_1
 

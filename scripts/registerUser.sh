@@ -1,5 +1,7 @@
 #!/bin/bash -eu
 
+source ./scripts/envBase.sh
+
 echo "Working on council"
 export FABRIC_CA_CLIENT_TLS_CERTFILES=$LOCAL_CA_PATH/council.seiun.net/ca/crypto/ca-cert.pem
 export FABRIC_CA_CLIENT_HOME=$LOCAL_CA_PATH/council.seiun.net/ca/admin

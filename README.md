@@ -27,17 +27,7 @@
 2. 启动网络
 
     ```shell
-    ./scripts/setDNS.sh -a
-    source ./scripts/envPeerCompany.sh
-
-    ./scripts/network.sh -u
-    ./scripts/registerUser.sh
-    ./scripts/enrollUser.sh
-
-    ./scripts/peerStartUp.sh
-    ./scripts/instCC.sh
-    # 将instCC.sh输出的CHAINCODE_ID复制到testCC.sh的CHAINCODE_ID中
-    ./scripts/testCC.sh
+    ruby control.rb -u
     ```
 
 3. 启动restAPI和webApp
